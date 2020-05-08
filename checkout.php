@@ -9,13 +9,24 @@
                     url: 'config.php',
                     dataType:'json',
                     success:function(dados){
-                        alert(dados.informacao);
+                        PagSeguroDirectPayment.setSessionld(dados.id);
+                        MetodosPag();//chama a função MetodosPad().
                     }
                 }); 
             });      
                  
+        //Função MetodosPag()
+        function MetodosPag(){
+            PagSeguroDirectPayment.getPaymentMethods({
+                amount: 500.00,
+                success: function(dados){
+                    console.log(dados.paymentMethods.CREDIT_CARD.name);
+                },error:function(dados){
+                    console.log(dados);
+                }
+            });
+        }
         </script>
-        
 
         <title>Sitema de pagamento</title>
         <style>
