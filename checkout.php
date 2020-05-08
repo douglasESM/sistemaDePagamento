@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
         <script>
+        
             window.addEventListener("load", function(event){
                 $.ajax({
                     url: 'config.php',
@@ -20,7 +21,7 @@
             PagSeguroDirectPayment.getPaymentMethods({
                 amount: 500.00,
                 success: function(dados){
-                    console.log(dados.paymentMethods.CREDIT_CARD.name);
+                    console.log(dados);
                 },error:function(dados){
                     console.log(dados);
                 }
@@ -34,7 +35,7 @@
                 PagSeguroDirectPayment.getBrand({
                     cardBin: num, //Recebe os 6 primeiros digitos
                     success: function(dados){
-                        console.log(dados);
+                        document.getElementsByName("band")[0].value=dados.brand.name;
                     },
                     error: function(dados){
                         console.log(dados);
