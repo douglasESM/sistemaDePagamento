@@ -26,6 +26,22 @@
                 }
             });
         }
+
+        /*Bandeira do Cartão */
+        function Brand(){
+            var num = document.getElementsByName("num-cartao")[0].value;
+            if(num.length == 6){
+                PagSeguroDirectPayment.getBrand({
+                    cardBin: num, //Recebe os 6 primeiros digitos
+                    success: function(dados){
+                        console.log(dados);
+                    },
+                    error: function(dados){
+                        console.log(dados);
+                    }
+                });
+            }
+        }
         </script>
 
         <title>Sitema de pagamento</title>
@@ -43,7 +59,8 @@
             .venc{
                 width: 60px;
             }
-
+            input[name="num-cartao"]{width:80%;}
+            input[name="band"]{width:19%}
             input[type="submit"]{background-color:#84EA84;}
         </style>
     </head> 
@@ -53,7 +70,10 @@
             <div>Email<input type="email" name="email"/></div>
             <div>Senha<input type="password" name="pass"/></div>
             <div>Nome cartão<input type="text" name="nome-cartao"/></div>
-            <div>Número cartão<input type="number" name="num-cartao"/></div>
+            <div>Número cartão
+                <input type="number" name="num-cartao" onKeyUp="Brand()" />
+                <input type="text" name="band"/>
+            </div>
             <div>CVV<input type="number" name="n-cvv"/></div>
             <div>Venc.
                 <input type="number" name="n-mes" class="venc" placeholder="12"/>
